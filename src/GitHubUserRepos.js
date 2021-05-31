@@ -9,11 +9,9 @@ class GitHubUserRepos extends Component {
     this.state = {
       searchText: '',
       repos: [],
-      sortDirection: 'desc'
     };
 
     this.handleSearchTextInput = this.handleSearchTextInput.bind(this);
-    this.handleSortChange = this.handleSortChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -21,7 +19,6 @@ class GitHubUserRepos extends Component {
     return axios.get('https://api.github.com/users/' + username + '/repos', {
         params: {
           sort: 'pushed',
-          direction: this.state.sortDirection
         }
       });
   }
@@ -42,12 +39,6 @@ class GitHubUserRepos extends Component {
     this.getRepos(this.state.searchText).then(this.updateRepos.bind(this));
   }
 
-  handleSortChange(direction) {
-    this.setState({ sortDirection: direction }, () => {
-      this.getRepos(this.state.searchText).then(this.updateRepos.bind(this));      
-    });    
-  }
-
   render() {
     return (
       <div>
@@ -63,7 +54,6 @@ class GitHubUserRepos extends Component {
         <RepoList 
           repos={this.state.repos}
           top={this.props.top}
-          onSortChange={this.handleSortChange}
         />
       </div>
     );

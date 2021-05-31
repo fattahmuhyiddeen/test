@@ -4,16 +4,6 @@ import RepoRow from './RepoRow';
 import RepoListHeader from './RepoListHeader';
 
 class RepoList extends Component {
-  constructor(props) {
-    super(props);
-
-    this.handleSortChange = this.handleSortChange.bind(this);
-  }
-  
-  handleSortChange(direction) {
-    this.props.onSortChange(direction);
-  }
-
   render() {
     if (!this.props.repos) {
       return null;
@@ -25,7 +15,7 @@ class RepoList extends Component {
     });
     return (
       <div>
-        <RepoListHeader repos={this.props.repos} top={this.props.top} onSortChange={this.handleSortChange} />
+        <RepoListHeader repos={this.props.repos} top={this.props.top} />
 
         <ListGroup className="text-left">
           {rows}

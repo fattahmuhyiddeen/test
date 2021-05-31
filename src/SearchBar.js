@@ -1,36 +1,25 @@
-import React, { Component } from 'react';
-import { Form, FormGroup, FormControl, ControlLabel, Button } from 'react-bootstrap';
+import React from 'react';
+import { Form, FormGroup, FormControl, Button } from 'react-bootstrap';
 
-class SearchBar extends Component {
-  constructor(props) {
-    super(props);
-    
-    this.handleSearchTextInputChange = this.handleSearchTextInputChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleSubmit(event) {
+const SearchBar = (props) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    this.props.onSubmit(event.target.value);
+    props.onSubmit(event.target.value);
   }
 
-  handleSearchTextInputChange(event) {
-    this.props.onSearchTextInput(event.target.value);
+  const handleSearchTextInputChange = (event) => {
+    props.onSearchTextInput(event.target.value);
   }
 
-  render() {
-    return (
-        <Form inline onSubmit={this.handleSubmit} className="text-left container-fluid">
-          <FormGroup controlId="formInlineName">
-            <ControlLabel>GitHub Username</ControlLabel>
-            {' '}
-            <FormControl type="text" placeholder="Enter username here" value={this.props.searchText} onChange={this.handleSearchTextInputChange} />
-          </FormGroup>
-          {' '}
-          <Button type="submit" bsStyle="primary">GO</Button>
-        </Form>
-    );
-  }
+  return (
+    <Form inline onSubmit={handleSubmit} className="text-left container-fluid">
+      <FormGroup controlId="formInlineName">
+        <FormControl type="text" placeholder="Search by language or topic" value={props.searchText} onChange={handleSearchTextInputChange} />
+      </FormGroup>
+      {' '}
+      <Button type="submit" bsStyle="primary">Search</Button>
+    </Form>
+  );
 }
 
 export default SearchBar;
