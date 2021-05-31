@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import RepoListHeader from '../RepoListHeader';
 
 describe('RepoListHeader', () => {
-    var repos = [ "some-repository", "some-other-repository" ];
+    constrepos = [ "some-repository", "some-other-repository" ];
 
     it('renders without crashing when list is empty', () => {
         shallow(<RepoListHeader />);

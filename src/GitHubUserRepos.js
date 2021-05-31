@@ -1,63 +1,38 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import SearchBar from './SearchBar';
 import RepoList from './RepoList';
 import axios from 'axios';
 
-class GitHubUserRepos extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      searchText: '',
-      repos: [],
-    };
+const GitHubUserRepos = (props) => {
+  const [searchText, setSearchText] = useState('');
+  const [repos, setRepos] = useState([]);
 
-    this.handleSearchTextInput = this.handleSearchTextInput.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  getRepos(username){
-    return axios.get('https://api.github.com/users/' + username + '/repos', {
+  const handleSubmit = () => {
+    axios.get('https://api.github.com/users/' + searchText + '/repos', {
+    // axios.get('https://api.github.com/search/repositories?q=language:' + searchText, {
         params: {
           sort: 'pushed',
         }
-      });
+      })
+      .then(res => setRepos(res.data));
   }
 
-  updateRepos(response) {
-    this.setState({
-      repos: response.data
-    })
-  }
+  return (
+    <div>
+      <SearchBar 
+        searchText={searchText}
+        onSearchTextInput={setSearchText}
+        onSubmit={handleSubmit}
+      />
 
-  handleSearchTextInput(searchText) {
-    this.setState({
-      searchText: searchText
-    });
-  }
-
-  handleSubmit() {
-    this.getRepos(this.state.searchText).then(this.updateRepos.bind(this));
-  }
-
-  render() {
-    return (
-      <div>
-        <SearchBar 
-          searchText={this.state.searchText}
-          sortOrder={this.state.sortOrder}
-          onSearchTextInput={this.handleSearchTextInput}
-          onSubmit={this.handleSubmit}
-        />
-
-        <hr />
-        
-        <RepoList 
-          repos={this.state.repos}
-          top={this.props.top}
-        />
-      </div>
-    );
-  }
+      <hr />
+      
+      <RepoList 
+        repos={repos}
+        top={props.top}
+      />
+    </div>
+  );
 }
 
 export default GitHubUserRepos;

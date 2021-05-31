@@ -1,33 +1,29 @@
-import React, { Component } from 'react';
-import { Grid, Row, Col } from 'react-bootstrap';
+import React from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
 
-class RepoListHeader extends Component {
-  render() {
-    if (!this.props.repos) {
-      return null;
-    }
+const RepoListHeader = (props) => {
+    if (!props.repos) return null;
 
-    return (
-        <Grid fluid>
-          <Row>
-            <Col md={8} className="text-left">
-              <h4>Repositories</h4>
-            </Col>
-          </Row>
+  return (
+      <Container fluid>
+        <Row>
+          <Col md={8} className="text-left">
+            <h4>Repositories</h4>
+          </Col>
+        </Row>
 
-          <Row className="text-left">
-            <Col md={12}>
-                <p>Found {this.props.repos.length} repositories.
-                {this.props.top && 
-                  <span>{' '}Showing top {this.props.top}.</span>
-                }
-              </p>
+        <Row className="text-left">
+          <Col md={12}>
+              <p>Found {props.repos.length} repositories.
+              {props.top && 
+                <span>{' '}Showing top {props.top}.</span>
+              }
+            </p>
 
-            </Col>
-          </Row>
-        </Grid>
-    );
-  }
+          </Col>
+        </Row>
+      </Container>
+  );
 }
 
 export default RepoListHeader;

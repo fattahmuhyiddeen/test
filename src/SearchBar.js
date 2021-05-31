@@ -17,7 +17,7 @@ const SearchBar = (props) => {
         <FormControl type="text" placeholder="Search by language or topic" value={props.searchText} onChange={handleSearchTextInputChange} />
       </FormGroup>
       {' '}
-      <Button type="submit" bsStyle="primary">Search</Button>
+      <Button type="submit">Search</Button>
     </Form>
   );
 }
