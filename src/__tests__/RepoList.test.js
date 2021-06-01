@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 
 import RepoListHeader from '../RepoListHeader';
 import RepoList from '../RepoList';
-import RepoRow from '../RepoRow';
+import Row from '../Row';
 
 describe('RepoList', () => {
     const repos = [
@@ -17,7 +17,7 @@ describe('RepoList', () => {
 
     it('renders the right number of rows', () => {
         const wrapper = shallow(<RepoList repos={repos} />);
-        const rows = wrapper.find(RepoRow);
+        const rows = wrapper.find(Row);
 
         expect(rows.length).toBe(2);
     });
@@ -32,7 +32,7 @@ describe('RepoList', () => {
             { "name": "repo 6" },
         ];
         const wrapper = shallow(<RepoList repos={aLotOfRepos} top={3} />);
-        const rows = wrapper.find(RepoRow);
+        const rows = wrapper.find(Row);
 
         expect(rows.length).toBe(3);
     });
@@ -40,8 +40,8 @@ describe('RepoList', () => {
     it('renders the rows properly', () => {
         const wrapper = shallow(<RepoList repos={repos} />);
 
-        expect(wrapper.find(RepoRow).first()).toHaveProp('repo', repos[0]);
-        expect(wrapper.find(RepoRow).last()).toHaveProp('repo', repos[1]);
+        expect(wrapper.find(Row).first()).toHaveProp('repo', repos[0]);
+        expect(wrapper.find(Row).last()).toHaveProp('repo', repos[1]);
     });
 
     it('contains the list header', () => {

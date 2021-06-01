@@ -16,7 +16,6 @@ const SearchBar = (props) => {
       <FormGroup controlId="formInlineName">
         <FormControl type="text" placeholder="Search by language or topic" value={props.searchText} onChange={handleSearchTextInputChange} />
       </FormGroup>
-      {' '}
       <Button type="submit">Search</Button>
     </Form>
   );

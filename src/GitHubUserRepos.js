@@ -8,13 +8,14 @@ const GitHubUserRepos = (props) => {
   const [repos, setRepos] = useState([]);
 
   const handleSubmit = () => {
-    axios.get('https://api.github.com/users/' + searchText + '/repos', {
-    // axios.get('https://api.github.com/search/repositories?q=language:' + searchText, {
+    // axios.get('https://api.github.com/users/' + searchText + '/repos', {
+    axios.get('https://api.github.com/search/repositories?q=language:' + searchText, {
         params: {
           sort: 'pushed',
         }
       })
-      .then(res => setRepos(res.data));
+      // .then(res => setRepos(res.data));
+      .then(res => setRepos(res.data.items));
   }
 
   return (

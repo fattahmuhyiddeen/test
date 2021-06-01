@@ -1,12 +1,12 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 
-import RepoRow from '../RepoRow';
+import Row from '../Row';
 import { ListGroupItem } from 'react-bootstrap';
 import TimeAgo from 'react-timeago';
 
-describe('RepoRow', () => {
-    constrepo = {
+describe('Row', () => {
+    const repo = {
         "name": "some-repository",
         "html_url": "https://some-url.com",
         "description": "Some description goes here.",
@@ -14,11 +14,11 @@ describe('RepoRow', () => {
     };
 
     it('renders without crashing', () => {
-        shallow(<RepoRow repo={repo} key={repo.name} />);
+        shallow(<Row repo={repo} key={repo.name} />);
     });
 
     it('renders a ListGroupItem with proper attributes', () => {
-        const wrapper = shallow(<RepoRow repo={repo} key={repo.name} />);
+        const wrapper = shallow(<Row repo={repo} key={repo.name} />);
         const listGroupItem = wrapper.find(ListGroupItem);
 
         expect(listGroupItem).toBeDefined();
@@ -27,14 +27,14 @@ describe('RepoRow', () => {
     });
 
     it('renders a ListGroupItem with description inside', () => {
-        const wrapper = mount(<RepoRow repo={repo} key={repo.name} />);
+        const wrapper = mount(<Row repo={repo} key={repo.name} />);
         const listGroupItem = wrapper.find(ListGroupItem);
 
         expect(listGroupItem).toIncludeText('Some description goes here.');
     });
 
     it('renders a ListGroupItem with last update time', () => {
-        const wrapper = mount(<RepoRow repo={repo} key={repo.name} />);
+        const wrapper = mount(<Row repo={repo} key={repo.name} />);
         const listGroupItem = wrapper.find(ListGroupItem).find('span.small');
 
         expect(listGroupItem).toContainReact(<TimeAgo date='2016-12-16T19:48:55Z' />);
